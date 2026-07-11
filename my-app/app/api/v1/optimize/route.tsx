@@ -1,5 +1,6 @@
 import { validateApiKey } from "@/lib/checkApi";
 import { ai } from "@/lib/gemini";
+import { connectDB } from "@/lib/mongodb";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -14,6 +15,7 @@ export async function POST(req: Request) {
 			);
 		}
 
+		await connectDB();
 		const valid = await validateApiKey(authHeader);
 
 		if (!valid) {
@@ -84,10 +86,13 @@ ${prompt}
 			status: 200,
 		});
 	} catch (error) {
-		console.error(error);
+		console.error("API ERROR:", error);
 
 		return NextResponse.json(
-			{ message: "Something went wrong." },
+			{
+				message: "Something went wrong.",
+				error: error instanceof Error ? error.message : String(error),
+			},
 			{ status: 500 },
 		);
 	}

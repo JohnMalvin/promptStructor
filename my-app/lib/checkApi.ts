@@ -25,6 +25,7 @@ export async function createNewApiKey(name = "Default"): Promise<string> {
 
 	await ApiKey.create({
 		keyHash,
+		revoked: false,
 	});
 
 	return apiKey;

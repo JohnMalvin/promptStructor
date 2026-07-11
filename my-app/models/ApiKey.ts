@@ -6,6 +6,10 @@ const ApiKeySchema = new Schema({
 		required: true,
 		unique: true,
 	},
+	revoked: {
+		type: Boolean,
+		required: true,
+	},
 });
 
 export interface IApiKey {
