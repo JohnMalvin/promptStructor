@@ -1,3 +1,4 @@
+import ApiKeyGenerator from "@/components/api-key-button";
 import { CodeBlock } from "@/components/code-block";
 
 export default function ApiDocsPage() {
@@ -29,10 +30,7 @@ export default function ApiDocsPage() {
 						Include your API key in every request.
 					</p>
 
-					<CodeBlock
-						title="Header"
-						code={`Authorization: Bearer YOUR_API_KEY`}
-					/>
+					<ApiKeyGenerator />
 				</div>
 			</section>
 
@@ -171,7 +169,7 @@ export default function App() {
 							</tr>
 						</thead>
 
-						<tbody>
+						<tbody className="bg-surface-2">
 							<tr>
 								<td className="px-5 py-4 font-mono">prompt</td>
 								<td className="px-5 py-4 text-accent">
