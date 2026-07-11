@@ -45,7 +45,7 @@ export default function ApiDocsPage() {
 						</span>
 
 						<code className="font-mono text-sm">
-							/prompt-structor
+							api/v1/optimize
 						</code>
 					</div>
 
@@ -64,7 +64,7 @@ export default function ApiDocsPage() {
 					<CodeBlock
 						title="JavaScript"
 						code={`const response = await fetch(
-  "https://vercelllll/prompt-structor",
+  "https://prompt-structor.vercel.app/api/v1/optimize",
   {
     method: "POST",
     headers: {
@@ -86,11 +86,12 @@ console.log(data);`}
 						title="React"
 						code={`async function optimizePrompt(prompt) {
   const response = await fetch(
-    "/api/optimize",
+    "/api/v1/optimize",
     {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Authorization": "Bearer YOUR_API_KEY"
       },
       body: JSON.stringify({
         prompt
@@ -121,7 +122,7 @@ export default function App() {
 
 					<CodeBlock
 						title="curl"
-						code={`curl https://vercelllll/prompt-structor \\
+						code={`curl https://prompt-structor.vercel.app/api/v1/optimize \\
   -X POST \\
   -H "Content-Type: application/json" \\
   -H "Authorization: Bearer YOUR_API_KEY" \\

@@ -1,4 +1,5 @@
 import { getCurrentUser } from "@/lib/auth";
+import { validateApiKey } from "@/lib/checkApi";
 import { ai } from "@/lib/gemini";
 import { NextResponse } from "next/server";
 
@@ -15,15 +16,6 @@ import { NextResponse } from "next/server";
 export async function POST(req: Request) {
 	try {
 		const { prompt } = await req.json();
-
-		// const user = await getCurrentUser();
-
-		// if (!user) {
-		// 	return NextResponse.json(
-		// 		{ message: "Not authenticated" },
-		// 		{ status: 401 },
-		// 	);
-		// }
 
 		const optimizationPrompt = `
 			You are an expert AI prompt optimizer.

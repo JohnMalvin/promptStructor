@@ -1,6 +1,5 @@
 import crypto from "crypto";
 import ApiKey from "@/models/ApiKey";
-import { connectDB } from "./mongodb";
 
 export async function validateApiKey(apiKey: string): Promise<boolean> {
 	if (!apiKey) return false;
