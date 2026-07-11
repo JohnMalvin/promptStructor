@@ -1,5 +1,5 @@
 import { validateApiKey } from "@/lib/checkApi";
-import { ai } from "@/lib/gemini";
+import { ai, cleanJson } from "@/lib/gemini";
 import { connectDB } from "@/lib/mongodb";
 import { NextResponse } from "next/server";
 
@@ -80,7 +80,7 @@ ${prompt}
 			);
 		}
 
-		const result = JSON.parse(response.text);
+		const result = JSON.parse(cleanJson(response.text));
 
 		return NextResponse.json(result, {
 			status: 200,

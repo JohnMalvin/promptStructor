@@ -1,6 +1,6 @@
 import { getCurrentUser } from "@/lib/auth";
 import { validateApiKey } from "@/lib/checkApi";
-import { ai } from "@/lib/gemini";
+import { ai, cleanJson } from "@/lib/gemini";
 import { NextResponse } from "next/server";
 
 // expected output format
@@ -61,7 +61,8 @@ export async function POST(req: Request) {
 			);
 		}
 
-		const result = JSON.parse(response.text);
+		const result = JSON.parse(cleanJson(response.text));
+
 		console.log("=========================");
 		console.log(result);
 		console.log("=========================");
