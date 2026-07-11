@@ -30,7 +30,7 @@ export function Header() {
 					<span
 						className="hidden rounded-full border border-border-default px-3 py-1 font-mono text-xs text-foreground-muted sm:block hover:bg-black/40 hover:font-bold cursor-pointer"
 						onClick={() => {
-							router.push("/getExtension");
+							window.open("https://chromewebstore.google.com/category/extensions", "_blank", "noopener,noreferrer");
 						}}
 					>
 						Get Extension
