@@ -1,64 +1,43 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 
-export default function RegisterPage() {
-	const [username, setUsername] = useState("");
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
+const IOBOX = "rounded-md bg-translator-card m-5 p-5 w-[30vw] h-[25vh] inset-shadow-sm inset-shadow-sky-400";
 
-	async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-		e.preventDefault();
+export default function MainPage() {
+	const userInput = useRef<HTMLTextAreaElement>(null);
+	const [output, setOutput] = useState("BAPAK LO");
 
-		const res = await fetch("/api/auth/register", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				username: "john",
-				email: "john@example.com",
-				password: "12345678",
-			}),
-		});
-
-		const data = await res.json();
-		console.log(data);
-
-		console.log("Status:", res.status);
-		console.log("Response:", data);
-
-		if (res.ok) {
-			alert("Registered successfully!");
-		} else {
-			alert(data.message ?? "Registration failed.");
+	function apiCall() {
+		if (userInput.current) {
+			userInput.current.focus();
+			setOutput(userInput.current.value);
 		}
 	}
-
 	return (
-		<form onSubmit={handleSubmit}>
-			<input
-				type="text"
-				placeholder="Username"
-				value={username}
-				onChange={(e) => setUsername(e.target.value)}
-			/>
+		<div className="flex flex-col">
+			<div>
+				<p>BAPAK LO DURABLE</p> {/* This is for random pun before we get into the translator*/}
+			</div>
 
-			<input
-				type="email"
-				placeholder="Email"
-				value={email}
-				onChange={(e) => setEmail(e.target.value)}
-			/>
+			<div className="flex flex-row items-center justify-center">
+				<div className={IOBOX}>
+					<textarea
+						placeholder="Your Prompt" className="resize-none outline-0 w-[25vw] h-[20vh]"
+						ref={userInput}
+					/>
+				</div>
 
-			<input
-				type="password"
-				placeholder="Password"
-				value={password}
-				onChange={(e) => setPassword(e.target.value)}
-			/>
+				<div>
+					<button onClick={apiCall} className="rounded-3xl border-none bg-button p-5">
+						Translate Now!
+					</button>
+				</div>
 
-			<button type="submit">Register</button>
-		</form>
+				<div className={IOBOX}>
+					<p>{output}</p>
+				</div>
+			</div>
+		</div>
 	);
 }
